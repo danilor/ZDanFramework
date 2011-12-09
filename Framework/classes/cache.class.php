@@ -57,6 +57,9 @@ class Cache{
         if(file_exists($file)){
             $modTime = date(filemtime($file));
             $timeBet = (time()-$modTime)/60;
+            if(filesize($file) == 0){
+                return '';
+            }
             if($timeBet <= $this->cacheTime){
                 $gestor = fopen($file, "r");
                 $content = fread($gestor, filesize($file));
